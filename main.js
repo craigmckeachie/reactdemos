@@ -1,28 +1,33 @@
-function FruitListCard({ fruit }) {
+const { useState } = React;
+
+function FruitListItem(props) {
   return (
-    <div style={{ border: "1px solid black" }}>
-      <strong>{fruit.name}</strong>
-      <p> ID: {fruit.id}</p>
-      <p>Color: {fruit.color}</p>
-    </div>
+    <li>
+      {props.fruit.name} | <button>Delete</button>
+    </li>
   );
 }
 
-function FruitList(props) {
-  const fruitListItems = props.fruits.map((fruit) => (
-    <FruitListCard key={fruit.id} fruit={fruit} />
-  ));
-  return <div>{fruitListItems}</div>;
+function FruitList() {
+  const [fruits, setFruits] = useState([
+    { id: 1, name: "apple" },
+    { id: 2, name: "orange" },
+    { id: 3, name: "blueberry" },
+    { id: 4, name: "banana" },
+    { id: 5, name: "kiwi" },
+  ]);
+
+  return (
+    <ul>
+      {fruits.map((fruit) => (
+        <FruitListItem key={fruit.id} fruit={fruit} />
+      ))}
+    </ul>
+  );
 }
 
-const data = [
-  { id: 1, name: "apple", color: "red" },
-  { id: 2, name: "orange", color: "orange" },
-  { id: 3, name: "blueberry", color: "blue" },
-  { id: 4, name: "banana", color: "yellow" },
-  { id: 5, name: "kiwi", color: "brown" },
-];
+function App() {
+  return <FruitList />;
+}
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <FruitList fruits={data} />
-);
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
