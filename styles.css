@@ -1,4 +1,17 @@
+.container{
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
+.list{
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
 .card{
   border: 1px solid lightgray;
-    
+  width: 18rem;  
+  padding: 2rem;
 }
+

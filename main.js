@@ -59,7 +59,11 @@ const songAPI = {
 };
 
 function App() {
-  return <SongList />;
+  return (
+    <div className="container">
+      <SongList />
+    </div>
+  );
 }
 
 function SongList() {
@@ -71,8 +75,8 @@ function SongList() {
     setSongs(data);
   }
 
-  useEffect(function () {
-    loadSongs();
+  useEffect( ()=> {
+    loadSongs()
   }, []);
 
   return (
