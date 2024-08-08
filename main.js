@@ -71,12 +71,14 @@ function SongList() {
   const [busy, setBusy] = useState(false);
 
   async function loadSongs() {
+    setBusy(true);
     let data = await songAPI.list();
     setSongs(data);
+    setBusy(false);
   }
 
-  useEffect( ()=> {
-    loadSongs()
+  useEffect(() => {
+    loadSongs();
   }, []);
 
   return (
@@ -85,6 +87,8 @@ function SongList() {
         <h1>Songs</h1>
       </header>
       <div className="list">
+        {busy && <div>Loading...</div>}
+
         {songs.map((song) => (
           <div className="card" key={song.songID}>
             <strong>{song.title}</strong>
