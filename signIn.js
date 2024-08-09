@@ -30,9 +30,18 @@ function SignInForm() {
           onChange={(event) => setPassword(event.target.value)}
           placeholder="enter password"
         />
-        {/* <select name="" id="" value={stateId}>
-          <option value="1">Ohio</option>
-          <option value="2">Nevada</option>
+        {/* <label htmlFor="status"></label>
+        <select
+          name="status"
+          id="status"
+          value={status}
+          onChange={(event) => setStatus(event.target.value)}
+        >
+          <option value="">Select...</option>
+          <option value="NEW">New</option>
+          <option value="APPROVED">Approved</option>
+          <option value="REJECTED">Rejected</option>
+          <option value="REVIEW">Review</option>
         </select> */}
         <input
           type="checkbox"
