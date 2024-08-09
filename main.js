@@ -1,78 +1,101 @@
 const { useState } = React;
 
 function ContactUsForm() {
-  //data
   const [department, setDepartment] = useState("");
-  let [message, setMessage] = useState("");
+  const [message, setMessage] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  //functions
-  function handleSubmit(event) {
-    event.preventDefault();
-    const data = { department, message, agreedToTerms };
-    console.log(data);
+  function validateForm() {
+    const newErrors = {};
+    if (!department) newErrors.department = "Department is required.";
+    if (!message) newErrors.message = "Message is required.";
+    if (!agreedToTerms)
+      newErrors.agreedToTerms = "You must agree to the terms.";
+    return newErrors;
   }
 
-  //html
+  function handleSubmit(event) {
+    event.preventDefault();
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+    } else {
+      setErrors({});
+      console.log("Form submitted:", { department, message, agreedToTerms });
+    }
+  }
 
   return (
-    <form className="card p-4" onSubmit={handleSubmit}>
+    <form className="mt-4" onSubmit={handleSubmit}>
       <div className="mb-3">
-        <label className="form-label" htmlFor="department">
+        <label htmlFor="department" className="form-label">
           Department
         </label>
         <select
-          className="form-select"
-          name="department"
           id="department"
+          className={`form-select ${errors.department ? "is-invalid" : ""}`}
+          name="department"
           value={department}
-          onChange={(event) => setDepartment(event.target.value)}
+          onChange={(e) => setDepartment(e.target.value)}
         >
           <option value="">Select...</option>
-          <option value="HR">Human Resources</option>
-          <option value="PR">Public Relations</option>
-          <option value="SUPPORT">Support</option>
+          <option value="hr">Human Resources</option>
+          <option value="pr">Public Relations</option>
+          <option value="support">Support</option>
         </select>
+        {errors.department && (
+          <div className="invalid-feedback">{errors.department}</div>
+        )}
       </div>
 
       <div className="mb-3">
-        <label className="form-label" htmlFor="message">
+        <label htmlFor="message" className="form-label">
           Message
         </label>
         <textarea
-          className="form-control"
-          name="message"
           id="message"
-          rows="6"
+          className={`form-control ${errors.message ? "is-invalid" : ""}`}
+          name="message"
           value={message}
-          onChange={(event) => setMessage(event.target.value)}
-        ></textarea>
-      </div>
-      <div className="mb-4 form-check">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          name="agreedToTerms"
-          id="agreedToTerms"
-          checked={agreedToTerms}
-          onChange={(event) => setAgreedToTerms(event.target.checked)}
+          onChange={(e) => setMessage(e.target.value)}
+          cols="30"
+          rows="5"
         />
-        <label className="form-check-label" htmlFor="agreedToTerms">
-          I agree to the terms and conditions
+        {errors.message && (
+          <div className="invalid-feedback">{errors.message}</div>
+        )}
+      </div>
+
+      <div className="mb-3 form-check">
+        <input
+          type="checkbox"
+          id="agreedToTerms"
+          className={`form-check-input ${
+            errors.agreedToTerms ? "is-invalid" : ""
+          }`}
+          name="agreedToTerms"
+          checked={agreedToTerms}
+          onChange={(e) => setAgreedToTerms(e.target.checked)}
+        />
+        <label htmlFor="agreedToTerms" className="form-check-label">
+          I agree to the terms and conditions.
         </label>
+        {errors.agreedToTerms && (
+          <div className="invalid-feedback">{errors.agreedToTerms}</div>
+        )}
       </div>
-      <hr />
-      <div className="d-flex gap-2 mt-2 justify-content-end">
-        <button className="btn btn-primary">Send</button>
-        <button className="btn btn-outline-primary">Cancel</button>
-      </div>
+
+      <button type="submit" className="btn btn-primary">
+        Send
+      </button>
     </form>
   );
 }
 
 function App() {
   return (
-    <div className="container mt-4">
+    <div className="container">
       <ContactUsForm />
     </div>
   );
