@@ -1,12 +1,12 @@
 const { useState } = React;
 function SignInForm() {
-  const [username, setUsername] = useState("cmckeachie");
-  const [password, setPassword] = useState("abc123");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
   function signIn(event) {
     event.preventDefault();
-    console.log({ username, password });
+    console.log({ username, password, rememberMe });
   }
 
   return (
@@ -34,7 +34,13 @@ function SignInForm() {
           <option value="1">Ohio</option>
           <option value="2">Nevada</option>
         </select> */}
-        <input type="checkbox" name="" id="" checked={rememberMe} on />
+        <input
+          type="checkbox"
+          name="rememberMe"
+          id="rememberMe"
+          checked={rememberMe}
+          onChange={(event) => setRememberMe(event.target.checked)}
+        />
         <button type="submit">Sign In</button>
       </form>
     </>
