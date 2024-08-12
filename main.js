@@ -1,7 +1,7 @@
-const okUrl = "http://localhost:9000/teams";
-const notFoundErrorUrl = "https://httpstat.us/404";
-const forbiddenErrorUrl = "https://httpstat.us/403";
-const serverErrorUrl = "https://httpstat.us/500";
+//main.js
+const { useState, useEffect } = React;
+
+const BASE_URL = "http://localhost:9000";
 
 function translateStatusToErrorMessage(status) {
   switch (status) {
@@ -33,17 +33,60 @@ function parseJSON(response) {
   return response.json();
 }
 
-
-async function loadTeams() {
-
-  try {
-    let response = await fetch(notFoundErrorUrl).then(checkStatus).then(parseJSON);
-  } catch (error) {
-    console.log(error.message);
-    
-  }
-  
-
+function delay(ms) {
+  return function (x) {
+    return new Promise((resolve) => setTimeout(() => resolve(x), ms));
+  };
 }
 
-loadTeams();
+const url = `${BASE_URL}/songs`;
+const songAPI = {
+  list() {
+    return fetch(url).then(checkStatus).then(parseJSON);
+  },
+};
+
+function SongList() {
+  const [busy, setBusy] = useState(false);
+  const [songs, setSongs] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
+  async function loadSongs() {
+    try {
+      setBusy(true);
+      let data = await songAPI.list();
+      setSongs(data);
+    } catch (error) {
+      setErrorMessage(error.message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  useEffect(function () {
+    loadSongs();
+  }, []);
+
+  return (
+    <div className="list mt-2">
+      {busy && <p>Loading...</p>}
+      {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
+      {songs?.map((song) => (
+        <div className="card p-4" key={song.songID}>
+          <strong>{song.title}</strong>
+          <div>{song.artist}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <div className="container">
+      <SongList />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
