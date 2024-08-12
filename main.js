@@ -1,33 +1,20 @@
-const { useState } = React;
+const { useForm } = ReactHookForm;
 
 function ContactUsForm() {
-  const [department, setDepartment] = useState("");
-  const [message, setMessage] = useState("");
-  const [agreedToTerms, setAgreedToTerms] = useState(false);
-  const [errors, setErrors] = useState({});
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  function validateForm() {
-    const newErrors = {};
-    if (!department) newErrors.department = "Department is required.";
-    if (!message) newErrors.message = "Message is required.";
-    if (!agreedToTerms)
-      newErrors.agreedToTerms = "You must agree to the terms.";
-    return newErrors;
-  }
+  console.log(register("department", { required: "Department is required" }));
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    const validationErrors = validateForm();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-    } else {
-      setErrors({});
-      console.log("Form submitted:", { department, message, agreedToTerms });
-    }
+  function send(formData) {
+    console.log("Form submitted:", formData);
   }
 
   return (
-    <form className="mt-4" onSubmit={handleSubmit}>
+    <form className="mt-4" onSubmit={handleSubmit(send)}>
       <div className="mb-3">
         <label htmlFor="department" className="form-label">
           Department
@@ -35,9 +22,9 @@ function ContactUsForm() {
         <select
           id="department"
           className={`form-select ${errors.department ? "is-invalid" : ""}`}
-          name="department"
-          value={department}
-          onChange={(e) => setDepartment(e.target.value)}
+          {...register("department", {
+            required: "The department is required",
+          })}
         >
           <option value="">Select...</option>
           <option value="hr">Human Resources</option>
@@ -45,7 +32,7 @@ function ContactUsForm() {
           <option value="support">Support</option>
         </select>
         {errors.department && (
-          <div className="invalid-feedback">{errors.department}</div>
+          <div className="invalid-feedback">{errors.department.message}</div>
         )}
       </div>
 
@@ -56,14 +43,14 @@ function ContactUsForm() {
         <textarea
           id="message"
           className={`form-control ${errors.message ? "is-invalid" : ""}`}
-          name="message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          {...register("message", {
+            required: "The message is required",
+          })}
           cols="30"
           rows="5"
         />
         {errors.message && (
-          <div className="invalid-feedback">{errors.message}</div>
+          <div className="invalid-feedback">{errors.message.message}</div>
         )}
       </div>
 
@@ -74,15 +61,15 @@ function ContactUsForm() {
           className={`form-check-input ${
             errors.agreedToTerms ? "is-invalid" : ""
           }`}
-          name="agreedToTerms"
-          checked={agreedToTerms}
-          onChange={(e) => setAgreedToTerms(e.target.checked)}
+          {...register("agreedToTerms", {
+            required: "You must agree to the terms to continue",
+          })}
         />
         <label htmlFor="agreedToTerms" className="form-check-label">
           I agree to the terms and conditions.
         </label>
         {errors.agreedToTerms && (
-          <div className="invalid-feedback">{errors.agreedToTerms}</div>
+          <div className="invalid-feedback">{errors.agreedToTerms.message}</div>
         )}
       </div>
 

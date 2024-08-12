@@ -4,8 +4,10 @@
   flex-wrap: wrap;
 }
 
-/* .card {
-  border: 1px solid lightgray;
+.card {
   width: 18rem;
-  padding: 2rem;
+}
+
+/* .active {
+  background-color: #bee5eb;
 } */

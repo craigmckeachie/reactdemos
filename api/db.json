@@ -1,0 +1,341 @@
+{
+  "teams": [
+    {
+      "id": 1,
+      "name": "Atlanta Hawks",
+      "division": "Southeast"
+    },
+    {
+      "id": 2,
+      "name": "Boston Celtics",
+      "division": "Atlantic"
+    },
+    {
+      "id": 3,
+      "name": "Brooklyn Nets",
+      "division": "Atlantic"
+    },
+    {
+      "name": "Charlotte Hornets Nest",
+      "division": "Southeast",
+      "id": 4
+    },
+    {
+      "id": 5,
+      "name": "Chicago Bulls",
+      "division": "Central"
+    },
+    {
+      "id": 6,
+      "name": "Cleveland Cavaliers",
+      "division": "Central"
+    },
+    {
+      "id": 7,
+      "name": "Dallas Mavericks",
+      "division": "Southwest"
+    },
+    {
+      "id": 8,
+      "name": "Denver Nuggets",
+      "division": "Northwest"
+    },
+    {
+      "id": 9,
+      "name": "Detroit Pistons",
+      "division": "Central"
+    },
+    {
+      "id": 10,
+      "name": "Golden State Warriors",
+      "division": "Pacific"
+    },
+    {
+      "id": 11,
+      "name": "Houston Rockets",
+      "division": "Southwest"
+    },
+    {
+      "id": 12,
+      "name": "Indiana Pacers",
+      "division": "Central"
+    },
+    {
+      "id": 13,
+      "name": "LA Clippers",
+      "division": "Pacific"
+    },
+    {
+      "id": 14,
+      "name": "Los Angeles Lakers",
+      "division": "Pacific"
+    },
+    {
+      "id": 15,
+      "name": "Memphis Grizzlies",
+      "division": "Southwest"
+    },
+    {
+      "id": 16,
+      "name": "Miami Heat",
+      "division": "Southeast"
+    },
+    {
+      "id": 17,
+      "name": "Milwaukee Bucks",
+      "division": "Central"
+    },
+    {
+      "id": 18,
+      "name": "Minnesota Timberwolves",
+      "division": "Northwest"
+    },
+    {
+      "id": 19,
+      "name": "New Orleans Pelicans",
+      "division": "Southwest"
+    },
+    {
+      "id": 20,
+      "name": "New York Knicks",
+      "division": "Atlantic"
+    },
+    {
+      "id": 21,
+      "name": "Oklahoma City Thunder",
+      "division": "Northwest"
+    },
+    {
+      "id": 22,
+      "name": "Orlando Magic",
+      "division": "Southeast"
+    },
+    {
+      "id": 23,
+      "name": "Philadelphia 76ers",
+      "division": "Atlantic"
+    },
+    {
+      "id": 24,
+      "name": "Phoenix Suns",
+      "division": "Pacific"
+    },
+    {
+      "id": 25,
+      "name": "Portland Trail Blazers",
+      "division": "Northwest"
+    },
+    {
+      "id": 26,
+      "name": "Sacramento Kings",
+      "division": "Pacific"
+    },
+    {
+      "id": 27,
+      "name": "San Antonio Spurs",
+      "division": "Southwest"
+    },
+    {
+      "id": 28,
+      "name": "Toronto Raptors",
+      "division": "Atlantic"
+    },
+    {
+      "id": 29,
+      "name": "Utah Jazz",
+      "division": "Northwest"
+    },
+    {
+      "id": 30,
+      "name": "Washington Wizards",
+      "division": "Southeast"
+    },
+    {
+      "name": "Cincinnati Royals",
+      "division": "Midwest",
+      "id": 32
+    }
+  ],
+  "songs": [
+    {
+      "songID": 1,
+      "title": "Levitating",
+      "artist": "Dua Lipa",
+      "album": "Future Nostalgia",
+      "year": 2020,
+      "genre": "Pop",
+      "durationInSeconds": 203
+    },
+    {
+      "songID": 2,
+      "title": "Blinding Lights",
+      "artist": "The Weeknd",
+      "album": "After Hours",
+      "year": 2019,
+      "genre": "Synthpop",
+      "durationInSeconds": 200
+    },
+    {
+      "songID": 3,
+      "title": "Good 4 U",
+      "artist": "Olivia Rodrigo",
+      "album": "SOUR",
+      "year": 2021,
+      "genre": "Pop Punk",
+      "durationInSeconds": 178
+    },
+    {
+      "songID": 4,
+      "title": "Stay",
+      "artist": "The Kid LAROI, Justin Bieber",
+      "album": "F*ck Love 3: Over You",
+      "year": 2021,
+      "genre": "Pop",
+      "durationInSeconds": 141
+    },
+    {
+      "songID": 5,
+      "title": "Montero (Call Me By Your Name)",
+      "artist": "Lil Nas X",
+      "album": "Montero",
+      "year": 2021,
+      "genre": "Pop Rap",
+      "durationInSeconds": 137
+    },
+    {
+      "songID": 6,
+      "title": "Peaches",
+      "artist": "Justin Bieber",
+      "album": "Justice",
+      "year": 2021,
+      "genre": "R&B",
+      "durationInSeconds": 198
+    },
+    {
+      "songID": 7,
+      "title": "Drivers License",
+      "artist": "Olivia Rodrigo",
+      "album": "SOUR",
+      "year": 2021,
+      "genre": "Pop",
+      "durationInSeconds": 242
+    },
+    {
+      "songID": 8,
+      "title": "Save Your Tears",
+      "artist": "The Weeknd",
+      "album": "After Hours",
+      "year": 2020,
+      "genre": "Synthpop",
+      "durationInSeconds": 215
+    },
+    {
+      "songID": 9,
+      "title": "Kiss Me More",
+      "artist": "Doja Cat feat. SZA",
+      "album": "Planet Her",
+      "year": 2021,
+      "genre": "R&B",
+      "durationInSeconds": 208
+    },
+    {
+      "songID": 10,
+      "title": "Industry Baby",
+      "artist": "Lil Nas X, Jack Harlow",
+      "album": "Montero",
+      "year": 2021,
+      "genre": "Hip Hop",
+      "durationInSeconds": 212
+    },
+    {
+      "songID": 11,
+      "title": "Butter",
+      "artist": "BTS",
+      "album": "Butter",
+      "year": 2021,
+      "genre": "Pop",
+      "durationInSeconds": 165
+    },
+    {
+      "songID": 12,
+      "title": "Deja Vu",
+      "artist": "Olivia Rodrigo",
+      "album": "SOUR",
+      "year": 2021,
+      "genre": "Pop",
+      "durationInSeconds": 224
+    },
+    {
+      "songID": 13,
+      "title": "Bad Habits",
+      "artist": "Ed Sheeran",
+      "album": "=",
+      "year": 2021,
+      "genre": "Pop",
+      "durationInSeconds": 231
+    },
+    {
+      "songID": 14,
+      "title": "Heat Waves",
+      "artist": "Glass Animals",
+      "album": "Dreamland",
+      "year": 2020,
+      "genre": "Indie Pop",
+      "durationInSeconds": 238
+    },
+    {
+      "songID": 15,
+      "title": "Levitating (feat. DaBaby)",
+      "artist": "Dua Lipa",
+      "album": "Future Nostalgia",
+      "year": 2020,
+      "genre": "Pop",
+      "durationInSeconds": 203
+    },
+    {
+      "songID": 16,
+      "title": "Shivers",
+      "artist": "Ed Sheeran",
+      "album": "=",
+      "year": 2021,
+      "genre": "Pop",
+      "durationInSeconds": 207
+    },
+    {
+      "songID": 17,
+      "title": "Cold Heart (PNAU Remix)",
+      "artist": "Elton John, Dua Lipa",
+      "album": "The Lockdown Sessions",
+      "year": 2021,
+      "genre": "Dance",
+      "durationInSeconds": 204
+    },
+    {
+      "songID": 18,
+      "title": "You Right",
+      "artist": "Doja Cat, The Weeknd",
+      "album": "Planet Her",
+      "year": 2021,
+      "genre": "R&B",
+      "durationInSeconds": 185
+    },
+    {
+      "songID": 19,
+      "title": "Happier Than Ever",
+      "artist": "Billie Eilish",
+      "album": "Happier Than Ever",
+      "year": 2021,
+      "genre": "Alternative",
+      "durationInSeconds": 298
+    },
+    {
+      "songID": 20,
+      "title": "My Universe",
+      "artist": "Coldplay, BTS",
+      "album": "Music of the Spheres",
+      "year": 2021,
+      "genre": "Pop Rock",
+      "durationInSeconds": 228
+    }
+  ]
+}
