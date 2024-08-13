@@ -71,7 +71,9 @@ function SongsPage() {
     <div>
       <header className="d-flex justify-content-between mb-4">
         <h2>Songs</h2>
-        <Link className="btn btn-outline-secondary" to="/songs/create">+ Add Song</Link>
+        <Link className="btn btn-outline-secondary" to="/songs/create">
+          + Add Song
+        </Link>
       </header>
       <hr />
       <SongList />
@@ -103,8 +105,35 @@ function SongList() {
           <strong>{song.title}</strong>
           <div>{song.artist}</div>
           <small>{song.year}</small>
+          <Link to={`/songs/edit/${song.songID}`}>edit</Link>
         </div>
       ))}
+    </div>
+  );
+}
+
+function SongCreatePage() {
+  return (
+    <div>
+      <header className="d-flex justify-content-between mb-4">
+        <h2>Add Song</h2>
+      </header>
+      <hr />
+    </div>
+  );
+}
+
+function SongEditPage() {
+  const { id: idFromUrl } = useParams();
+  const songId = Number(idFromUrl);
+
+  return (
+    <div>
+      <header className="d-flex justify-content-between mb-4">
+        <h2>Edit Song</h2>
+      </header>
+      <hr />
+      {songId}
     </div>
   );
 }
@@ -153,6 +182,8 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="songs" element={<SongsPage />} />
+            <Route path="songs/create" element={<SongCreatePage />} />
+            <Route path="songs/edit/:id" element={<SongEditPage />} />
             <Route path="artists" element={<ArtistsPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
