@@ -119,6 +119,7 @@ function SongCreatePage() {
         <h2>Add Song</h2>
       </header>
       <hr />
+      <SongForm />
     </div>
   );
 }
@@ -133,8 +134,73 @@ function SongEditPage() {
         <h2>Edit Song</h2>
       </header>
       <hr />
-      {songId}
+      <SongForm />
     </div>
+  );
+}
+
+function SongForm() {
+  // {
+  //   "songID": 1,
+  //   "title": "Levitating",
+  //   "artist": "Dua Lipa",
+  //   "album": "Future Nostalgia",
+  //   "year": 2020,
+  //   "genre": "Pop",
+  //   "durationInSeconds": 203
+  // }
+  return (
+    <form className="w-25">
+      <div className="mb-3">
+        <label htmlFor="title" className="form-label">
+          Title
+        </label>
+        <input id="title" type="text" className="form-control" />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="artist" className="form-label">
+          Artist
+        </label>
+        <input id="artist" type="text" className="form-control" />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="album" className="form-label">
+          Album
+        </label>
+        <input id="album" type="text" className="form-control" />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="year" className="form-label">
+          Year
+        </label>
+        <input id="year" type="number" className="form-control" />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="genre" className="form-label">
+          Genre
+        </label>
+        <select id="genre" className="form-select">
+          <option value="">Select...</option>
+          <option value="1">Rock</option>
+          <option value="2">Pop</option>
+          <option value="3">Hip-Hop</option>
+        </select>
+      </div>
+      <div className="mb-3">
+        <label htmlFor="durationInSeconds" className="form-label">
+          Duration
+        </label>
+        <input id="durationInSeconds" type="number" className="form-control" />
+        <small className="form-text">in seconds</small>
+      </div>
+      <hr />
+      <div className="d-flex gap-2">
+        <button className="btn btn-primary" type="submit">
+          Save
+        </button>
+        <button className="btn btn-outline-secondary">Cancel</button>
+      </div>
+    </form>
   );
 }
 
