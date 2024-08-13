@@ -10,16 +10,16 @@ const {
   useNavigation,
 } = ReactRouterDOM;
 
-function Home() {
+function HomePage() {
   return <h2>Home</h2>;
 }
 
-function About() {
-  return <h2>About</h2>;
+function SongsPage() {
+  return <h2>Songs</h2>;
 }
 
-function Contact() {
-  return <h2>Contact</h2>;
+function ArtistsPage() {
+  return <h2>Artists</h2>;
 }
 
 function NotFound() {
@@ -46,13 +46,13 @@ function App() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/about">
-                About
+              <NavLink className="nav-link" to="/songs">
+                Songs
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/contact">
-                Contact
+              <NavLink className="nav-link" to="/artists">
+                Artists
               </NavLink>
             </li>
           </ul>
@@ -60,9 +60,9 @@ function App() {
 
         <div className="container mt-4">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="contact" element={<Contact />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="songs" element={<SongsPage />} />
+            <Route path="artists" element={<ArtistsPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
