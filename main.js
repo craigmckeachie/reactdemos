@@ -1,5 +1,5 @@
 const { useState, useEffect } = React;
-
+const { useForm } = ReactHookForm;
 const {
   BrowserRouter: Router,
   Route,
@@ -139,29 +139,52 @@ function SongEditPage() {
   );
 }
 
+let formInfo = {
+  register: function () {},
+  handleSubmit: function () {},
+  watch: function () {},
+  getValues: function () {},
+  formState: {
+    errors: {},
+  },
+};
+
 function SongForm() {
-  // {
-  //   "songID": 1,
-  //   "title": "Levitating",
-  //   "artist": "Dua Lipa",
-  //   "album": "Future Nostalgia",
-  //   "year": 2020,
-  //   "genre": "Pop",
-  //   "durationInSeconds": 203
-  // }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  function save(song) {
+    console.log(song);
+  }
+
   return (
-    <form className="w-25">
+    <form className="w-25" onSubmit={handleSubmit(save)}>
       <div className="mb-3">
         <label htmlFor="title" className="form-label">
           Title
         </label>
-        <input id="title" type="text" className="form-control" />
+        <input
+          id="title"
+          type="text"
+          className={`form-control ${errors.title && "is-invalid"}`}
+          {...register("title", { required: "Title is required" })}
+        />
+        <p className="invalid-feedback">{errors.title?.message}</p>
       </div>
       <div className="mb-3">
         <label htmlFor="artist" className="form-label">
           Artist
         </label>
-        <input id="artist" type="text" className="form-control" />
+        <input
+          id="artist"
+          type="text"
+          className={`form-control ${errors.artist && "is-invalid"}`}
+          {...register("artist", { required: "Artist is required" })}
+        />
+        <p className="invalid-feedback">{errors.artist?.message}</p>
       </div>
       <div className="mb-3">
         <label htmlFor="album" className="form-label">
