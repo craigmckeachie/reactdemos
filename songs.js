@@ -2,7 +2,7 @@ const { useState, useEffect } = React;
 
 const songs = [
   {
-    songID: 1,
+    id: 1,
     title: "Levitating",
     artist: "Dua Lipa",
     album: "Future Nostalgia",
@@ -11,7 +11,7 @@ const songs = [
     durationInSeconds: 203,
   },
   {
-    songID: 2,
+    id: 2,
     title: "Blinding Lights",
     artist: "The Weeknd",
     album: "After Hours",
@@ -20,7 +20,7 @@ const songs = [
     durationInSeconds: 200,
   },
   {
-    songID: 3,
+    id: 3,
     title: "Good 4 U",
     artist: "Olivia Rodrigo",
     album: "SOUR",
@@ -29,7 +29,7 @@ const songs = [
     durationInSeconds: 178,
   },
   {
-    songID: 4,
+    id: 4,
     title: "Stay",
     artist: "The Kid LAROI, Justin Bieber",
     album: "F*ck Love 3: Over You",
@@ -38,7 +38,7 @@ const songs = [
     durationInSeconds: 141,
   },
   {
-    songID: 5,
+    id: 5,
     title: "Montero (Call Me By Your Name)",
     artist: "Lil Nas X",
     album: "Montero",
@@ -90,7 +90,7 @@ function SongList() {
         {busy && <div>Loading...</div>}
 
         {songs.map((song) => (
-          <div className="card" key={song.songID}>
+          <div className="card" key={song.id}>
             <strong>{song.title}</strong>
             <div>{song.artist}</div>
             <small>{song.year}</small>

@@ -1,5 +1,7 @@
-# GET http://localhost:9000/teams/4
+### GET ONE
+ GET http://localhost:9000/teams/4
 
+### GET ALL
 GET http://localhost:9000/teams
 
 ### 404 Test

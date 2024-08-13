@@ -1,0 +1,35 @@
+### GET ALL
+GET http://localhost:9000/songs
+
+### GET ONE
+ GET http://localhost:9000/songs/4
+
+
+
+### POST (Insert)
+POST http://localhost:9000/songs/
+Content-Type: application/json
+
+{
+    "title": "Houdini",
+    "artist": "Eminem",
+    "album": "Houdini",
+    "year": 2024,
+    "genre": "Hip Hop",
+    "durationInSeconds": 234
+  }
+
+### PUT (Update)
+
+PUT http://localhost:9000/songs/4
+Content-Type: application/json
+
+{
+    "id": 1,
+    "title": "Levitating",
+    "artist": "Dua Lipa",
+    "album": "Future Nostalgia",
+    "year": 2020,
+    "genre": "Pop",
+    "durationInSeconds": 203
+  }

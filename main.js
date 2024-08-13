@@ -59,6 +59,20 @@ const songAPI = {
   list() {
     return fetch(url).then(checkStatus).then(parseJSON);
   },
+  find(id) {
+    return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
+  },
+  insert(song) {
+    return fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(song),
+    })
+      .then(checkStatus)
+      .then(parseJSON);
+  },
 };
 
 //Components UI
@@ -101,11 +115,11 @@ function SongList() {
       {busy && <div>Loading...</div>}
 
       {songs.map((song) => (
-        <div className="card p-4" key={song.songID}>
+        <div className="card p-4" key={song.id}>
           <strong>{song.title}</strong>
           <div>{song.artist}</div>
           <small>{song.year}</small>
-          <Link to={`/songs/edit/${song.songID}`}>edit</Link>
+          <Link to={`/songs/edit/${song.id}`}>edit</Link>
         </div>
       ))}
     </div>
@@ -155,77 +169,94 @@ function SongForm() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(undefined);
 
-  function save(song) {
-    console.log(song);
+  async function save(song) {
+    try {
+      setBusy(true);
+      let newSong = await songAPI.insert(song);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
-    <form className="w-25" onSubmit={handleSubmit(save)}>
-      <div className="mb-3">
-        <label htmlFor="title" className="form-label">
-          Title
-        </label>
-        <input
-          id="title"
-          type="text"
-          className={`form-control ${errors.title && "is-invalid"}`}
-          {...register("title", { required: "Title is required" })}
-        />
-        <p className="invalid-feedback">{errors.title?.message}</p>
-      </div>
-      <div className="mb-3">
-        <label htmlFor="artist" className="form-label">
-          Artist
-        </label>
-        <input
-          id="artist"
-          type="text"
-          className={`form-control ${errors.artist && "is-invalid"}`}
-          {...register("artist", { required: "Artist is required" })}
-        />
-        <p className="invalid-feedback">{errors.artist?.message}</p>
-      </div>
-      <div className="mb-3">
-        <label htmlFor="album" className="form-label">
-          Album
-        </label>
-        <input id="album" type="text" className="form-control" />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="year" className="form-label">
-          Year
-        </label>
-        <input id="year" type="number" className="form-control" />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="genre" className="form-label">
-          Genre
-        </label>
-        <select id="genre" className="form-select">
-          <option value="">Select...</option>
-          <option value="1">Rock</option>
-          <option value="2">Pop</option>
-          <option value="3">Hip-Hop</option>
-        </select>
-      </div>
-      <div className="mb-3">
-        <label htmlFor="durationInSeconds" className="form-label">
-          Duration
-        </label>
-        <input id="durationInSeconds" type="number" className="form-control" />
-        <small className="form-text">in seconds</small>
-      </div>
-      <hr />
-      <div className="d-flex gap-2">
-        <button className="btn btn-primary" type="submit">
-          Save
-        </button>
-        <Link to="/songs" className="btn btn-outline-secondary">
-          Cancel
-        </Link>
-      </div>
-    </form>
+    <>
+      {busy && <p>Saving...</p>}
+      {error && <div className="alert alert-danger">{error}</div>}
+      <form className="w-25" onSubmit={handleSubmit(save)}>
+        <div className="mb-3">
+          <label htmlFor="title" className="form-label">
+            Title
+          </label>
+          <input
+            id="title"
+            type="text"
+            className={`form-control ${errors.title && "is-invalid"}`}
+            {...register("title", { required: "Title is required" })}
+          />
+          <p className="invalid-feedback">{errors.title?.message}</p>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="artist" className="form-label">
+            Artist
+          </label>
+          <input
+            id="artist"
+            type="text"
+            className={`form-control ${errors.artist && "is-invalid"}`}
+            {...register("artist", { required: "Artist is required" })}
+          />
+          <p className="invalid-feedback">{errors.artist?.message}</p>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="album" className="form-label">
+            Album
+          </label>
+          <input id="album" type="text" className="form-control" />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="year" className="form-label">
+            Year
+          </label>
+          <input id="year" type="number" className="form-control" />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="genre" className="form-label">
+            Genre
+          </label>
+          <select id="genre" className="form-select">
+            <option value="">Select...</option>
+            <option value="1">Rock</option>
+            <option value="2">Pop</option>
+            <option value="3">Hip-Hop</option>
+          </select>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="durationInSeconds" className="form-label">
+            Duration
+          </label>
+          <input
+            id="durationInSeconds"
+            type="number"
+            className="form-control"
+          />
+          <small className="form-text">in seconds</small>
+        </div>
+        <hr />
+        <div className="d-flex gap-2">
+          <button className="btn btn-primary" type="submit">
+            Save
+          </button>
+          <Link to="/songs" className="btn btn-outline-secondary">
+            Cancel
+          </Link>
+        </div>
+      </form>
+    </>
   );
 }
 
