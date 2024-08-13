@@ -198,7 +198,9 @@ function SongForm() {
         <button className="btn btn-primary" type="submit">
           Save
         </button>
-        <button className="btn btn-outline-secondary">Cancel</button>
+        <Link to="/songs" className="btn btn-outline-secondary">
+          Cancel
+        </Link>
       </div>
     </form>
   );
