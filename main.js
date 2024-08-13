@@ -9,7 +9,7 @@ const {
   Navigate,
   useParams,
   useLocation,
-  useNavigation,
+  useNavigate,
 } = ReactRouterDOM;
 
 const BASE_URL = "http://localhost:9000";
@@ -171,11 +171,13 @@ function SongForm() {
   } = useForm();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(undefined);
+  const navigate = useNavigate();
 
   async function save(song) {
     try {
       setBusy(true);
       let newSong = await songAPI.insert(song);
+      navigate("/songs");
     } catch (error) {
       setError(error.message);
     } finally {
