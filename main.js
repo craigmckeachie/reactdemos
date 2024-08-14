@@ -73,6 +73,16 @@ const songAPI = {
       .then(checkStatus)
       .then(parseJSON);
   },
+  update(song) {
+    return fetch(`${url}/${song.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(song),
+    }).then(checkStatus);
+    // .then(parseJSON);
+  },
 };
 
 //Components UI
@@ -139,9 +149,6 @@ function SongCreatePage() {
 }
 
 function SongEditPage() {
-  const { id: idFromUrl } = useParams();
-  const songId = Number(idFromUrl);
-
   return (
     <div>
       <header className="d-flex justify-content-between mb-4">
@@ -164,11 +171,21 @@ let formInfo = {
 };
 
 function SongForm() {
+  const { id } = useParams();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: async function () {
+      let song = await songAPI.find(id);
+      if (!song) {
+        song = {};
+      }
+      return song;
+    },
+  });
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(undefined);
   const navigate = useNavigate();
@@ -176,7 +193,12 @@ function SongForm() {
   async function save(song) {
     try {
       setBusy(true);
-      let newSong = await songAPI.insert(song);
+      if (!song?.id) {
+        let newSong = await songAPI.insert(song);
+      } else {
+        await songAPI.update(song);
+      }
+
       navigate("/songs");
     } catch (error) {
       setError(error.message);
@@ -218,24 +240,39 @@ function SongForm() {
           <label htmlFor="album" className="form-label">
             Album
           </label>
-          <input id="album" type="text" className="form-control" />
+          <input
+            id="album"
+            type="text"
+            className="form-control"
+            {...register("album", { required: "Album is required" })}
+          />
         </div>
         <div className="mb-3">
           <label htmlFor="year" className="form-label">
             Year
           </label>
-          <input id="year" type="number" className="form-control" />
+          <input
+            id="year"
+            type="number"
+            className="form-control"
+            {...register("year", { required: "Year is required" })}
+          />
         </div>
         <div className="mb-3">
           <label htmlFor="genre" className="form-label">
             Genre
           </label>
-          <select id="genre" className="form-select">
+          <select
+            id="genre"
+            className={`form-control ${errors.genre && "is-invalid"}`}
+            {...register("genre", { required: "Genre is required" })}
+          >
             <option value="">Select...</option>
-            <option value="1">Rock</option>
-            <option value="2">Pop</option>
-            <option value="3">Hip-Hop</option>
+            <option value="Pop">Pop</option>
+            <option value="Synth Pop">Synth Pop</option>
+            <option value="R&B">R&B</option>
           </select>
+          <p className="invalid-feedback">{errors.genre?.message}</p>
         </div>
         <div className="mb-3">
           <label htmlFor="durationInSeconds" className="form-label">
@@ -244,9 +281,17 @@ function SongForm() {
           <input
             id="durationInSeconds"
             type="number"
-            className="form-control"
+            className={`form-control ${
+              errors.durationInSeconds && "is-invalid"
+            }`}
+            {...register("durationInSeconds", {
+              required: "Duration is required",
+            })}
           />
           <small className="form-text">in seconds</small>
+          <p className="invalid-feedback">
+            {errors.durationInSeconds?.message}
+          </p>
         </div>
         <hr />
         <div className="d-flex gap-2">

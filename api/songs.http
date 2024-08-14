@@ -2,7 +2,7 @@
 GET http://localhost:9000/songs
 
 ### GET ONE
- GET http://localhost:9000/songs/4
+ GET http://localhost:9000/songs/1
 
 
 
