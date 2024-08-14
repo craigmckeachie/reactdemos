@@ -180,9 +180,9 @@ function SongForm() {
   } = useForm({
     defaultValues: async function () {
       let song = await songAPI.find(id);
-      if (!song) {
-        song = {};
-      }
+      // if (!song) {
+      //   song = {};
+      // }
       return song;
     },
   });
@@ -193,7 +193,7 @@ function SongForm() {
   async function save(song) {
     try {
       setBusy(true);
-      if (!song?.id) {
+      if (!song.id) {
         let newSong = await songAPI.insert(song);
       } else {
         await songAPI.update(song);
